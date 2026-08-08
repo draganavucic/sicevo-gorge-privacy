@@ -5,107 +5,249 @@
   <title>Sićevo Gorge - Discover Nature</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    :root {
+      --bg-start: #9a89b2;
+      --bg-end: #6f5c89;
+      --accent: #b36b23;
+      --card-bg: rgba(44, 28, 58, 0.58);
+      --text-main: #fffaf5;
+      --text-soft: #f2e8de;
+      --line: rgba(255, 235, 214, 0.3);
+      --nav-bg: rgba(179, 107, 35, 0.16);
+      --focus-ring: rgba(255, 246, 236, 0.98);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #2b2bb5, #6a1bb3);
-      color: #fff;
-      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.2), transparent 36%),
+        radial-gradient(circle at 78% 20%, rgba(154, 137, 178, 0.28), transparent 38%),
+        radial-gradient(circle at 88% 82%, rgba(179, 107, 35, 0.2), transparent 34%),
+        linear-gradient(140deg, var(--bg-start) 0%, #8972a8 44%, var(--bg-end) 100%);
+      color: var(--text-main);
     }
+
+    .page {
+      width: min(1080px, 100%);
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 20px 45px rgba(8, 15, 28, 0.48);
+      overflow: hidden;
+      animation: rise-in 420ms ease-out;
+    }
+
     header {
-      padding: 30px 20px 10px;
-      font-size: 2rem;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: clamp(1.4rem, 2.8vw, 1.95rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.92rem;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+    }
+
+    .nav a:hover {
+      background: var(--nav-bg);
+      border-color: var(--line);
+    }
+
+    .nav a.active {
+      background: rgba(179, 107, 35, 0.22);
+      border-color: rgba(255, 226, 198, 0.7);
+      color: #fff8ef;
       font-weight: 600;
     }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
     .content {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      gap: 24px;
+      padding: 24px 22px;
     }
-    .phones {
-      max-width: 700px;
-      width: 90%;
-      margin: 20px auto;
-    }
-    .phones img {
-      width: 100%;
+
+    .hero-image {
+      width: min(100%, 520px);
+      display: block;
       height: auto;
-      border-radius: 12px;
+      border-radius: 16px;
     }
+
     h2 {
-      font-size: 1.6rem;
-      margin-top: 20px;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      margin: 0;
     }
+
     p {
-      font-size: 1.1rem;
+      font-size: 1.04rem;
       max-width: 600px;
-      margin: 10px auto 30px;
-      line-height: 1.6;
+      margin: 12px auto 26px;
+      line-height: 1.7;
+      color: var(--text-soft);
     }
+
     .play-badge img {
       width: 180px;
       height: auto;
-      margin-top: 10px;
+      margin-top: 2px;
+      transition: transform 180ms ease, filter 180ms ease;
+      border-radius: 10px;
+      box-shadow: 0 8px 18px rgba(127, 0, 0, 0.2);
     }
+
+    .play-badge img:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
     footer {
-      font-size: 0.9rem;
-      color: #ddd;
-      margin-top: 40px;
-      padding-bottom: 20px;
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      margin-top: 6px;
+      padding: 18px 22px 22px;
+      border-top: 1px solid var(--line);
     }
+
     .links a {
-      color: #fff;
+      color: var(--text-main);
       text-decoration: underline;
       margin: 0 10px;
       font-size: 0.95rem;
     }
+
+    .links a:hover {
+      color: #ffd8b5;
+      text-decoration-thickness: 2px;
+    }
+
+    .text {
+      max-width: 520px;
+      text-align: center;
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @media (min-width: 768px) {
       .content {
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
+        text-align: left;
+        padding: 34px 34px 30px;
+        gap: 34px;
+      }
+
+      header {
+        padding: 18px 34px;
+      }
+
+      .text {
+        max-width: 430px;
         text-align: left;
       }
-      .text {
-        max-width: 400px;
+
+      .hero-image {
+        max-width: 420px;
       }
-      .phones {
-        max-width: 350px;
+
+      p {
+        margin-left: 0;
+      }
+
+      footer {
+        text-align: left;
+        padding: 18px 34px 22px;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>Sićevo Gorge</header>
+  <main class="page">
+    <header>
+      <div class="topbar">
+        <div class="brand">Sićevo Gorge</div>
+        <nav class="nav" aria-label="Main navigation">
+          <a class="active" href="index.html" aria-current="page">Home</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms & Conditions</a>
+        </nav>
+      </div>
+    </header>
 
-  <div class="content">
-    <div class="phones">
-      <!-- Replace with your image later -->
-      <img src="images/phones.png" alt="Sićevo Gorge app preview">
-    </div>
+    <div class="content">
+      <img class="hero-image" src="images/phones.png" alt="Sićevo Gorge app preview">
 
-    <div class="text">
-      <h2>Great app for your next adventure!</h2>
-      <p>Discover with us Sićevo Gorge & enjoy nature like never before.  
-      Explore culture, history, landscapes, and local attractions — all in one place.</p>
+      <div class="text">
+        <h2>Great app for your next adventure!</h2>
+        <p>Discover with us Sićevo Gorge & enjoy nature like never before.
+        Explore culture, history, landscapes, and local attractions in one place.</p>
 
-      <div class="play-badge">
-        <a href="https://sicevo-gorge.flycricket.io/?download=rs.nis.sicevo.discoverer" target="_blank">
-          <img src="images/google-play-badge.png" alt="Get it on Google Play">
-        </a>
+        <div class="play-badge">
+          <a href="https://sicevo-gorge.flycricket.io/?download=rs.nis.sicevo.discoverer" target="_blank" rel="noopener noreferrer">
+            <img src="images/google-play-badge.png" alt="Get it on Google Play">
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <footer>
-    <div class="links">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms & Conditions</a>
-    </div>
-    © 2026 Dragana Vucic — Sićevo Gorge App
-  </footer>
+    <footer>
+      © 2026 Dragana Vucic - Sićevo Gorge App
+    </footer>
+  </main>
 
 </body>
 </html>
